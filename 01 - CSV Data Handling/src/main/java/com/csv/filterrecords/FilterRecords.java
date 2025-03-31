@@ -7,6 +7,7 @@ import java.io.FileReader;
 public class FilterRecords {
     public static void main(String[] args) {
         String filepath = "src/main/java/com/csv/filterrecords/content/StudentsRecords.csv";
+
         try(CSVReader reader = new CSVReader(new FileReader(filepath))) {
             String[] line;
             int marksColumn = 3;
