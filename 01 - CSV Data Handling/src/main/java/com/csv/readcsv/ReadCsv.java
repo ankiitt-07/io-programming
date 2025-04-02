@@ -1,5 +1,7 @@
 package com.csv.readcsv;
 
+import com.opencsv.CSVReader;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -7,15 +9,14 @@ import java.io.IOException;
 public class ReadCsv {
     public static void main(String[] args) {
         String filepath = "src/main/java/com/csv/readcsv/content/StudentDetails.csv";
-        try(BufferedReader br = new BufferedReader(new FileReader(filepath))){
-            String line ;
-            while((line= br.readLine()) != null){
-                String[] data = line.split(",");
-                System.out.println("ID: " + data[0]+" Name: " + data[1]);
+        try(CSVReader reader = new CSVReader(new FileReader(filepath))){
+            String[] line ;
+            while((line = reader.readNext()) != null){
+                System.out.println(line[0]+" " + line[1]);
             }
         }
-        catch(IOException e){
-            System.out.println(e.getStackTrace());
+        catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }
