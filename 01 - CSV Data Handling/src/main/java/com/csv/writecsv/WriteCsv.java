@@ -1,23 +1,32 @@
 package com.csv.writecsv;
 
-import java.io.BufferedWriter;
+import com.opencsv.CSVReader;
+import com.opencsv.CSVWriter;
+
+
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Arrays;
 
 public class WriteCsv {
     public static void main(String[] args) {
         String filepath = "src/main/java/com/csv/writecsv/content/output.csv";
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter(filepath,true))){
-            writer.write("ID,Name,Department,Salary\n");
-            writer.write("01,Ankit,FSO,550000\n");
-            writer.write("02,Jerry,IT,600000\n");
-            writer.write("03,Shadow,BusinessDevelopment,800000\n");
-            writer.write("04,Paul,ProjectHandler,750000\n");
-            writer.write("05,Domnic,HR,8555000\n");
-            System.out.println("CSV file written successfully!");
+        List<String[]> data = Arrays.asList(
+                new String[] {"Id","Name","Department","Salary"},
+                new String[]{"1","Ankit","HR","85000"},
+                new String[]{"2","Jerry","ProductManager","657555"},
+                new String[]{"3","Anmol","Analyst","785444"},
+                new String[]{"4","Rishav","Developer","120000"}
+                );
+
+        try(CSVWriter writer = new CSVWriter(new FileWriter(filepath))){
+            writer.writeAll(data);
+            System.out.println("Csv File witten Successfully..");
         }
-        catch(IOException e){
-            e.printStackTrace();
+        catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }
